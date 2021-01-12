@@ -1,0 +1,107 @@
+<header>
+  <form class="form-inline">
+    <input type="date" class="form-control mr-sm-2" name="fecha" [(ngModel)]="vta.fecha">
+    <input class="form-control mr-sm-2" id="busca" type="search" placeholder="Buscar por Nombre" aria-label="Search"
+      name="searchItem" (input)="searchArticulos()" [(ngModel)]="searchItem">
+    <button class="btn btn-outline-primary" (click)="pesable=!pesable;searchArticulos()">
+      <i *ngIf="pesable" class="fa fa-balance-scale fa-2x text-white" aria-hidden="true"></i>
+      <i *ngIf="!pesable" class="fa fa-balance-scale fa-2x text-white-50" aria-hidden="true"></i>
+    </button>
+    <button class="btn btn-outline-primary" (click)="precio=!precio;searchArticulos()">
+      <i *ngIf="precio" class="fa fa-money fa-2x text-white" aria-hidden="true"></i>
+      <i *ngIf="!precio" class="fa fa-money fa-2x text-white-50" aria-hidden="true"></i>
+    </button>
+    <button class="btn btn-outline-primary" (click)="stock=!stock;searchArticulos()">
+      <i *ngIf="stock" class="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i>
+      <i *ngIf="!stock" class="fa fa-shopping-cart fa-2x text-white-50" aria-hidden="true"></i>
+    </button>
+  </form>
+</header>
+<div id='main' (window:resize)="onResize($event)">
+  <article>
+    <section class="d-flex justify-content-between align-items-center flex-wrap pt-2" >
+      <app-caja-articulos
+        [hidden]="!showArticulos" 
+        *ngFor="let articulo of articuloList; index as i;" 
+        [index]="i" 
+        [articulo]="articulo"
+        (onAddProducto)="addProducto($event)"
+      >
+      </app-caja-articulos>
+    </section>
+    <section >
+      <div class="sticky-top m-2" [hidden]="!showClientes">
+        <form class="">
+           <div class="form-group">
+              <input class="form-control" type="search" placeholder="Buscar por Nombre" aria-label="Search" name="searchCliente" (input)="searchClientes()" [(ngModel)]="searchItem">
+           </div>
+        </form>
+      </div>
+      <div class="d-flex justify-content-between align-items-center flex-wrap pt-2" >
+        <app-caja-clientes
+          [hidden]="!showClientes"
+          *ngFor="let cliente of clientesList; index as i;" 
+          [index]="i" 
+          [cliente]="cliente"
+          (onSelectCliente)="setCliente($event)"
+        ></app-caja-clientes>
+      </div>
+      </section>
+  </article>
+  <nav>
+    <div id='control'>
+      <section>
+        <div id='kart'>
+          <div id="items" class="itemskart">
+            <app-caja-kart *ngFor="let item of vta.kartList; index as i;" 
+              [index]="i" [item]="item"
+              (onChangeProduct)="changeProduct($event)">
+            </app-caja-kart>
+          </div>
+          <div class="totalkart">
+            <div class="float-right">
+              <div> {{vta.subTotal}} </div>
+              <div> {{vta.itemsCount}} </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <div id="panelcontrol">
+          <div class="pagos">
+            <select name="pagoTipo" 
+              (change)="changePago()" [(ngModel)]="vta.pagoTipo">
+            <option value="{{n}}" *ngFor="let pago of pagos;index as n">{{pago.name}}</option>
+          </select>
+          <button class="btn btn-block" (click)="clienteSelect()">{{vta.cliente.name}}</button>
+          <button class="btn btn-block" (click)="pagar()" >Pagar</button>
+          <button class="btn btn-block" (click)="Testing()" >Testing</button>
+          <button class="btn btn-block" (click)="Totales()" >${{totVta}}</button>
+          </div>
+          <div class="teclado">
+            <div class=" d-flex justify-content-between align-items-right flex-wrap p-1">
+              <button class="tecla btn">1</button>
+              <button class="tecla btn">2</button>
+              <button class="tecla btn">3</button>
+              <button class="tecla btn teclasmall">Cnt</button>
+              <button class="tecla btn">4</button>
+              <button class="tecla btn">5</button>
+              <button class="tecla btn">6</button>
+              <button class="tecla btn teclasmall">Des</button>
+              <button class="tecla btn">7</button>
+              <button class="tecla btn">8</button>
+              <button class="tecla btn">9</button>
+              <button class="tecla btn">$</button>
+              <button class="tecla btn">+/-</button>
+              <button class="tecla btn">0</button>
+              <button class="tecla btn">.</button>
+              <button class="tecla btn">&lt;</button>
+            </div>
+          </div>
+        </div>
+
+      </footer>
+    </div>
+  </nav>
+  <aside>aside</aside>
+</div>

@@ -1,0 +1,24 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+</div>
+<img class="card-img-top"
+	src="https://scontent.fcor5-1.fna.fbcdn.net/v/t1.0-9/83745522_101802471386124_8777483706303512576_o.jpg?_nc_cat=100&_nc_sid=e3f864&_nc_ohc=SLIIJA5RCyUAX-CmRSj&_nc_ht=scontent.fcor5-1.fna&oh=4f7ce322537f12b076b96e207ad6b9c9&oe=5F13A86F"
+	alt="">
+<div class="row p-4">
+	<div class="col-md-6" *ngFor="let d of data">
+		<div class="card mb-2">
+			<div class="home-img-box">
+				<img
+					src="{{d.image}}"
+					class="resize_fit_center" alt="...">
+			</div>
+			<div class="card-body">
+				<h3 class="card-title">{{d.titulo}}</h3>
+				<p class="card-text">{{d.texto}}</p>
+			</div>
+			<div class="card-body" >
+				<a *ngFor="let l of d.links" [routerLink]="[l.link]" class="card-link">{{l.texto}}</a>
+			</div>
+		</div>
+	</div>
+</div>

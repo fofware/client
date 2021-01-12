@@ -1,0 +1,190 @@
+#main {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-flex-flow: row;
+          flex-flow: row;
+}
+#main > article {
+  margin: 0px;
+  padding: 0px;
+  border-radius: 7pt;
+/*
+  border: 1px solid #cccc33;
+  background: #dddd88;
+*/
+  -webkit-flex: 3 1 60%;
+          flex: 3 1 60%;
+  -webkit-order: 2;
+          order: 2;
+  overflow: auto;
+}
+ 
+ #main > nav {
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #8888bb;
+  border-radius: 7pt;
+/*
+  min-width:430px;
+  max-width:430px;
+*/
+  background: #ccccff;
+  -webkit-flex: 1 6 30%;
+          flex: 1 6 30%;
+  -webkit-order: 1;
+          order: 1;
+  }
+ 
+  #main > aside {
+  margin: 0px;
+  padding: 0px;
+/*
+  border: 1px solid #8888bb;
+*/
+  min-width: 235px;
+  border-radius: 7pt;
+  -webkit-flex: 1 6 40%;
+          flex: 1 6 40%;
+  -webkit-order: 3;
+          order: 3;
+  overflow: auto;
+  }
+  #main > aside.compra {
+    background: #fffee2;
+  } 
+  #main > aside.venta {
+
+    background: #eeeeff;
+
+  } 
+ header, footer {
+  display: block;
+  margin: 4px;
+  padding: 5px;
+  min-height: 50px;
+  border: 1px solid #222222;
+  border-radius: 7pt;
+  background: #444444;
+  color: #cccccc
+  }
+
+  #main > article > #comprobante {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: column;
+            flex-flow: column;
+  }
+  #main > article > #comprobante > .items {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #cccc33;
+    border-radius: 7pt;
+    border-radius: unset;
+    -webkit-flex: 3 1 60%;
+            flex: 3 1 60%;
+    overflow: auto;
+  }
+  #main > article > #comprobante > header, 
+  #main > article > #comprobante > footer {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: 58px;
+    border: unset;
+    border-radius: unset;
+/*
+    border-radius: 7pt;
+*/
+    background: #444444;
+    color: #cccccc
+    }
+  
+/* Too narrow to support three columns */
+ @media all and (max-width: 640px) {
+ 
+  #main, #page {
+   -webkit-flex-flow: column;
+           flex-flow: column;
+  }
+
+  #main > article, #main > nav, #main > aside {
+   /* Return them to document order */
+   -webkit-order: 0;
+           order: 0;
+  }
+ 
+  #main > nav, #main > aside, header, footer {
+   min-height: 50px;
+   max-height: 50px;
+  }
+ }
+/* Too narrow to support three columns */
+ @media print {
+  #main {
+    font-size: x-large;
+    height: unset;
+    margin: 0px;
+    padding: 0px;
+    display: unset;
+    -webkit-flex-flow: unset;
+            flex-flow: unset;
+  }
+  #main > article {
+    margin: 0px;
+    padding: 0px;
+    border-radius: 7pt;
+  /*
+    border: 1px solid #cccc33;
+    background: #dddd88;
+  */
+    -webkit-flex: unset;
+            flex: unset;
+    -webkit-order: unset;
+            order: unset;
+    overflow: unset;
+  }
+  #main > nav,
+  #browseArticulos, 
+  #main > aside, 
+  #main > aside > #myPay, 
+  #main > aside > #browseArticules, 
+  #main > aside > .venta, 
+  #main > aside > #browseArticules > .venta, 
+  #main > article > #comprobante > header, 
+  header, 
+  footer {
+    display: none;
+  }
+  #main > article > #comprobante > .items {
+    height: unset;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #cccc33;
+    border-radius: 7pt;
+    border-radius: unset;
+    flex: unset;
+    overflow: unset;
+  }
+  #main > article > #comprobante > #itemsCmp {
+    height: unset;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #cccc33;
+    border-radius: 7pt;
+    border-radius: unset;
+    flex: unset;
+    overflow: unset;
+  }
+  li, img {
+    page-break-inside: avoid;
+  }
+}

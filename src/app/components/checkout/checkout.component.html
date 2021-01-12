@@ -1,0 +1,30 @@
+<div style="position: relative; height: 100px;">
+  <h1 class="display-4"
+    style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;font-weight: bold;">
+    ${{cmp.sumaCobro | number}}</h1>
+  <button (click)="addPago(1)">Efectivo</button>
+  <button (click)="addPago(2)">Tarjeta</button>
+  <button [hidden]="!cmp.isAccount()">Cuenta</button>
+</div>
+<div class="row d-flex" *ngFor="let item of cmp.pagos; index as i;">
+  <div class ="col" >{{item.saldo}}</div>
+  <input class="col" id='pago{{i}}' 
+    name="pago{{i}}" 
+    type="text" 
+    [(ngModel)]="item.value" 
+    (keyup)="evento(i)">
+  <div class ="col" >
+    <div [hidden]="item.vuelto==0" >{{item.vuelto}}</div>
+  </div>
+  <div class="col">{{item.tipo}}</div>
+  <div class="col"><button class="btn btn-danger" (click)="deletePago(i)"><i class="fa fa-trash"
+    aria-hidden="true"></i></button></div>
+</div>
+<div [hidden]="cmp.saldo<=0 || saldo == cmp.data.sumaBruto" class="row">
+  <div class="col">{{cmp.saldo}}</div>
+</div>
+<div *ngIf="cmp.sumaPagos == cmp.sumaCobro" 
+  class="btn btn-success btn-block"
+  (click)="grabar()"
+  >Grabar</div>
+

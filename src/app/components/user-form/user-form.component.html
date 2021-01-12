@@ -1,0 +1,98 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+  <header class="bg-light clearfix">
+    <a routerLink="/users" class="btn btn-sm btn-outline-warning float-right">Cancel</a>
+  </header>
+</div>
+<div style="height: 100%;" [hidden]="done">
+  Procesando....
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <div [hidden]="edit">
+          Creando una cuenta
+        </div>
+        <div [hidden]="!edit">
+          Modificando una cuenta
+        </div>
+      </div>
+      <div class="card-body">
+        <form>
+          <div [hidden]="edit">
+            <div class="form-group" >
+              <input type="text" class="form-control" name="email" [(ngModel)]="user.email"
+                placeholder="Ingrese su correo electrónico (e-Mail)">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="password" class="form-control" name="password" [(ngModel)]="user.password"
+                  placeholder="Ingrese una contraseña">
+              </div>
+              <div class="form-group col-md-6">
+                <input type="password" class="form-control" name="password2" [(ngModel)]="user.password2"
+                  placeholder="Reescriba la contraseñas">
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="form-group" [hidden]="!edit" >
+            <input type="text" class="form-control" name="emailfix" [(ngModel)]="user.email"
+              placeholder="Ingrese su correo electrónico (e-Mail)" disabled>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="firstname" class="form-control" name="nombre" [(ngModel)]="user.nombre"
+                placeholder="Ingrese su Nombre/s">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="lastname" class="form-control" name="apellido" [(ngModel)]="user.apellido"
+                placeholder="Ingrese su Apellido/s">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="mobile" class="form-control" name="celular" [(ngModel)]="user.celular"
+                placeholder="Nro Celular">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="phone" class="form-control" name="fijo" [(ngModel)]="user.fijo"
+                placeholder="Nro Teléfono Fijo">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="addres" class="form-control" name="direccion" [(ngModel)]="user.direccion"
+              placeholder="Dirección">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="zipcode" class="form-control" name="zipcode" [(ngModel)]="user.zipcode"
+                placeholder="Código Postal">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="city" class="form-control" name="localidad" [(ngModel)]="user.localidad"
+                placeholder="Localidad">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="state" class="form-control" name="provincia" [(ngModel)]="user.provincia"
+                placeholder="Provincia">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="country" class="form-control" name="pais" [(ngModel)]="user.pais" placeholder="País">
+            </div>
+          </div>
+        </form>
+        <div class="form-group" [hidden]="edit">
+          <button class="btn btn-primary btn-block" (click)="add()">Crear la Cuenta</button>
+        </div>
+        <div class="form-group" [hidden]="!edit">
+          <button class="btn btn-primary btn-block" (click)="update()">Modificar la Cuenta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

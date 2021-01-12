@@ -1,0 +1,115 @@
+<div class="card mx-1 mb-1">
+  <div class="card-body pt-0 pb-0">
+    <div class="row">
+      <div class="col-2">
+        <div class="d-flex align-items-center justify-content-center flex-nowrap h-100">
+          <div style="height: 120px;">
+            <img class="h-100" src="{{item.data.producto.image}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-10 pr-0 pl-0">
+        <h5  contentEditable="true">{{item.data.producto.fullName}}</h5>
+        <div class="form">
+          <div class="form-row justify-content-end">
+            <div class="col-auto">
+              <div [hidden]="!item.data.producto.pesable" class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">x$</div>
+                </div>
+                <input type="number"
+                  class="form-control" 
+                  style="width:110px; text-align: right;"
+                  name="importeCmp_{{index}}" 
+                  placeholder="Importe" 
+                  (change)="calcularCantidad()"
+                  [(ngModel)]="item.valores.importe" 
+                  aria-describedby="importeHelp">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">Cn</div>
+                </div>
+              <input type="number" 
+                class="form-control" 
+                style="width:110px; text-align: right;" 
+                name="itemCantidad_{{index}}" 
+                placeholder="Cnt"
+                (change)="calcularSubTot()"
+                [(ngModel)]="item.data.cantidad">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">&nbsp;$&nbsp;</div>
+                </div>
+                <input type="number" class="form-control" 
+                  style="width:110px; text-align: right;"
+                  name="itemPrecio_{{index}}" placeholder="Precio" 
+                  (change)="calcularCantidad()"
+                  [(ngModel)]="item.data.precio" aria-describedby="precioHelp" disabled>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">&nbsp;$&nbsp;</div>
+                </div>
+                <input type="number" class="form-control" 
+                  style="width:110px; text-align: right;"
+                  name="itema_Cliente{{index}}" placeholder="CliPrecio" 
+                  (change)="calcularCantidad()"
+                  [(ngModel)]="item.data.a_persona" aria-describedby="ValoresDescuentoHelp" disabled>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">&nbsp;$&nbsp;</div>
+                </div>
+                <input type="number" class="form-control" 
+                  style="width:110px; text-align: right;"
+                  name="itema_pago_{{index}}" placeholder="Ajuste" 
+                  (change)="calcularCantidad()"
+                  [(ngModel)]="item.data.a_pago" aria-describedby="ValoresRecargoHelp" disabled>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">&nbsp;$&nbsp;</div>
+                </div>
+                <input type="number" class="form-control" 
+                  style="width:110px; text-align: right;"
+                  name="itemrPrecio{{index}}" placeholder="CliPrecio" 
+                  (change)="calcularCantidad()"
+                  [(ngModel)]="item.data.rPrecio" aria-describedby="ValoresDescuentoHelp" disabled>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 45px;">&nbsp;$&nbsp;</div>
+                </div>
+                <input type="number" class="form-control" 
+                  style="width:110px; text-align: right;"
+                  name="itemDescuento_{{index}}" placeholder="Descuento" 
+                  (change)="calcularSubTot()"
+                  [(ngModel)]="item.data.descuento" aria-describedby="descuentoHelp">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-danger mb-2" 
+                style="width: 155px;" (click)="delete()">
+                $ {{item.data.sumaTotal}} <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

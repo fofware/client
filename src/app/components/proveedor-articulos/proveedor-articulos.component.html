@@ -1,0 +1,25 @@
+<div>
+  <div class="d-flex flex-wrap justify-content-start align-items-left bg-light m-2">
+      <img src="{{producto.image}}" alt="" style="width:120px;height: auto;">
+      <span>{{producto.barcode}}</span>
+      <span>{{producto.stock}}</span>
+      <div class="m-1 float-left">
+        <input style="width: 600px;" type="text" name="producto[{{index}}].name" (change)="producto.changed=true;change(index,producto)" [(ngModel)]="producto.name" placeholder="Descripcion Proveedor">
+      </div>
+      <div class="m-1 float-left">
+        <input style="width: 150px;" type="text" name="producto[{{index}}].codigo" (change)="producto.changed=true;change(index,producto)" [(ngModel)]="producto.codigo" placeholder="Codigo Proveedor">
+      </div>
+      <div class="m-1 float-left">
+        <input style="width: 100px;" type="text" name="producto[{{index}}].stockMinimo" (change)="producto.changed=true;change(index,producto)" [(ngModel)]="producto.stockMinimo" placeholder="Stock Minimo">
+      </div>
+      <div class="m-1 float-left">
+        <input style="width: 100px;" type="text" name="producto[{{index}}].precioUltimaCompra" (change)="producto.changed=true;change(index,producto)" [(ngModel)]="producto.precioUltimaCpra" placeholder="Ultima Compra">
+      </div>
+      <div class="m-1 float-left">
+        <input style="width: 100px;" type="text" name="producto[{{index}}].precioReposicion" (change)="producto.changed=true;change(index,producto)" [(ngModel)]="producto.precioReposicion" placeholder="Reposicion">
+      </div>
+      <div class="m-1 float-right">
+        <button class="btn btn-danger" type="text" name="producto[{{index}}].borra" (click)="delete(index, producto)"></button>
+      </div>
+  </div>
+</div>

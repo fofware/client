@@ -1,0 +1,175 @@
+#mainPersonas {
+  height: 99.8%;
+  margin: 0px;
+  padding: 0px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-flex-flow: column;
+          flex-flow: column;
+}
+
+#mainPersonas > header {
+  margin: 0px;
+  padding: 4px;
+/*
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+  background: #dddd88;
+  overflow: hidden;
+  min-height: 50px;
+*/
+  -webkit-flex: 3 1 -1%;
+          flex: 3 1 -1%;
+  -webkit-order: 1;
+          order: 1;
+}
+#mainPersonas > article {
+  margin: 0px;
+  padding: 0px;
+/*
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+  background: #dddd88;
+  max-height: 200px;
+*/
+  -webkit-flex: 3 1 -1%;
+          flex: 3 1 -1%;
+  -webkit-order: 2;
+          order: 2;
+  overflow: hidden;
+}
+#mainPersonas > section {
+  margin: 0px;
+  padding: 0px;
+/*
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+  background: #dddd88;
+*/
+  -webkit-flex: 3 1 70%;
+          flex: 3 1 70%;
+  -webkit-order: 3;
+          order: 3;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/*
+#mainPersonas > section > table {
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-flex-flow: column;
+          flex-flow: column;
+  height: 98.8%;
+}
+
+#mainPersonas > section > table > thead {
+  -webkit-flex: 3 1 10%;
+          flex: 3 1 10%;
+  min-height: 50px;
+  max-height: 50px;
+  -webkit-order: 1;
+          order: 1;
+}  
+#mainPersonas > section > table > tbody {
+  -webkit-flex: 3 1 90%;
+          flex: 3 1 90%;
+  -webkit-order: 2;
+          order: 2;
+  overflow: auto;
+}  
+*/
+#mainPersonas > nav {
+  display: none;
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #8888bb;
+  border-radius: 7pt;
+/*
+  min-width:430px;
+  max-width:430px;
+*/
+  background: #ccccff;
+  -webkit-flex: 1 6 30%;
+          flex: 1 6 30%;
+  -webkit-order: 1;
+          order: 1;
+  }
+ 
+  #mainPersonas > aside {
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #8888bb;
+  min-width: 235px;
+  border-radius: 7pt;
+  -webkit-flex: 1 6 40%;
+          flex: 1 6 40%;
+  -webkit-order: 3;
+          order: 3;
+  overflow: auto;
+  }
+  #mainPersonas > aside.compra {
+    background: #fffee2;
+  } 
+  #mainPersonas > aside.venta {
+
+    background: #eeeeff;
+
+  } 
+/*
+ header, footer {
+  display: block;
+  margin: 4px;
+  padding: 5px;
+  min-height: 50px;
+  border: 1px solid #bdbdbd;
+  border-radius: 7pt;
+  background: #cecece;
+  color: #eeeeee
+  }
+*/
+  .persona-box{
+    position:relative;
+    width:300px; 
+    height: 200px;
+  }
+
+  #personas {
+    height: 99.8%;
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: column;
+            flex-flow: column;
+  }
+  #personas > .items {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+  /*
+    border: 1px solid #cccc33;
+    border-radius: 7pt;
+  */
+    -webkit-flex: 3 1 60%;
+            flex: 3 1 60%;
+    overflow: auto;
+  }
+/* Too narrow to support three columns */
+ @media all and (max-width: 640px) {
+ 
+  #main, #page {
+   -webkit-flex-flow: column;
+           flex-flow: column;
+  }
+
+  #main > article, #main > nav, #main > aside {
+   /* Return them to document order */
+   -webkit-order: 0;
+           order: 0;
+  }
+ 
+  #main > nav, #main > aside, header, footer {
+   min-height: 50px;
+   max-height: 50px;
+  }
+ }

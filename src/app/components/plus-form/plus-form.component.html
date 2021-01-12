@@ -1,0 +1,65 @@
+<div class="sticky-top">
+	<app-navigation></app-navigation>
+	<header class="bg-light clearfix">
+		<a [routerLink]="['/plus']" class="btn btn-outline-warning float-right">Cancelar</a>
+	</header>
+</div>
+<div class="row">
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
+				<form>
+					<div class="form-group">
+						<label for="id">id</label>
+						<input class="form-control" type="text" name="id" #idInput [(ngModel)]="plu.id" placeholder="Código de Id"
+							(blur)="findPlu(plu.id)" autofocus >
+					</div>
+					<div class="form-group">
+						<label for="description">Descripción</label>
+						<input class="form-control" type="text" name="description" #descriptionInput [(ngModel)]="plu.description"
+							placeholder="Descripción">
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input class="custom-control-input" type="checkbox" name="pesable">
+						<label class="custom-control-label" for="pesable">
+							Este producto se pesa para vender
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="precio">Precio</label>
+						<input class="form-control" type="text" name="precio" [(ngModel)]="plu.precio" placeholder="Precio">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="vencimiento" [(ngModel)]="plu.vencimiento"
+							placeholder="Vencimiento">
+					</div>
+					<div class="row">
+						<div class="col">
+							<button class="btn btn-success btn-block" (click)="edit ? updatePlu() : saveNewPlu()">Save</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-6">
+		<div class="card text-center">
+			<div class="card-heder bg-info d-flex justify-content-between align-items-center">
+				<span><i class="fab fa-orcid"></i>{{plu.id == 0 ? 'Debes poner un nro' : plu.id }}</span>
+			</div>
+			<div class="card-body">
+				{{plu.description == '' ? 'Escribe una Descripción' : plu.description}}
+				<p>
+					{{plu.precio == 0 ? 'Pon el precio' : plu.precio }}
+				</p>
+				<p>
+					{{plu.pesable}}
+				</p>
+				<p>
+					{{plu.vencimiento == 0 ? 'Dias en que vencerá' : plu.vencimiento }}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

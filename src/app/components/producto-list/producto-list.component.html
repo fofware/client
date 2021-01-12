@@ -1,0 +1,15 @@
+<div class="caja-box btn btn-outline-primary ml-1 mb-1 app-btn" (click)="addPrducto(index, producto)" >
+    <h3 class="stock" aria-hidden="true">{{producto.stock}} </h3>
+    <i class="pesable fa fa-balance-scale fa-fw fa-2x" aria-hidden="true" [hidden]="!producto.pesable"></i>
+    <img class="caja-img" src="{{producto.image}}" alt="">
+    <div class="nombre">
+      {{producto.name}}
+    </div>
+    <div class="precio w-100">
+      <h2>${{producto.precio}}</h2>
+    </div>
+  </div>
+
+<!--
+<button class="btn btn-outline-secondary btn-block mt-1" (click)="addPrducto(index, producto)">{{producto.name}}</button>
+-->

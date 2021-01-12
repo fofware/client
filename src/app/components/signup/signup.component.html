@@ -1,0 +1,71 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+</div>
+<!--div class="row pt-2">
+  <div class="col-md-8 mx-auto">
+    <div class="card">
+      <div class="card-header">
+        Crear una cuenta de acceso
+      </div>
+      <div class="card-body">
+        <form (submit)=signUp()>
+          <div class="form-group">
+            <input type="text" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Nombre de Usuario o email" required autofocus>
+          </div>
+          <div class="form-group">
+            <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="contraseña" required>
+          </div>
+          <button type="submit" class='btn btn-primary btn-block'>
+            Enviar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+
+  </div>
+</div-->
+
+<div class="row mt-2">
+  <div class="col-md-8 offset-2">
+    <div class="card">
+      <div class="card-header">
+        Creando una cuenta
+      </div>
+      <div class="card-body">
+        <form (submit)="signUp()">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="firstname" class="form-control" name="nombre" [(ngModel)]="user.nombre"
+                placeholder="Ingrese su Nombre/s">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="lastname" class="form-control" name="apellido" [(ngModel)]="user.apellido"
+                placeholder="Ingrese su Apellido/s">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="email" [(ngModel)]="user.email"
+              placeholder="Ingrese su correo electrónico (e-Mail)">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="password" class="form-control" name="password" [(ngModel)]="user.password"
+                placeholder="Ingrese una contraseña">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="password" class="form-control" name="password2" [(ngModel)]="user.password2"
+                placeholder="Vuelva a ingrese la contraseña">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Crear la Cuenta</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!--div class="col-md-4">
+
+  </div-->
+</div>

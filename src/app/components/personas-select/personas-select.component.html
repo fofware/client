@@ -1,0 +1,104 @@
+<div id='mainPersonas' (window:resize)="onResize($event)">
+  <header id='headerPersonas' class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+      <div class="col-6 d-flex justify-content-center">
+        <div class="row">
+          <div class="col-8">
+            <form class="form-inline" style="width: fit-content; display: unset;">
+            <input type="text" class="form-control" name="searchPersona" placeholder="Buscar Persona"
+              [(ngModel)]="searchPersona" (keyup)="find()">
+            </form>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-outline-info btn-block">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <!--i class="fa fa-user-o" aria-hidden="true"></i-->
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="float-right">
+          <button class="btn btn-info" [hidden]="setMessage()" (click)="asigna()">{{selectedMsg}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <article [hidden]="!isPersonaSelected">
+    <div class="card">
+      <div class="card-header p-0">
+        <div class="float-left" style="height: 70px;width: 70px">
+          <img src="" alt="" style="height: 100%; width: auto;">
+        </div>
+        <div style="font-size: 36px;">
+          {{personaSelected.apellido}} {{personaSelected.nombre}}
+          <i class="fa fa-pencil-square-o float-right mt-1 mx-2" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-body p-0 bg-light">
+        <div class="row">
+          <div class="col-6">
+            <table class="table table-sm mb-0">
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-right align-middle" style="width: 100px;">Dirección :</th>
+                  <td>{{personaSelected.direccion}} ({{personaSelected.zipcode}}) {{personaSelected.localidad}}
+                    {{personaSelected.provincia}} {{personaSelected.pais}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-right align-middle" style="width: 100px;">Teléfono :</th>
+                  <td>{{personaSelected.celular}} {{personaSelected.telefono}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-right align-middle" style="width: 100px;">e-Mail :</th>
+                  <td>{{personaSelected.email}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-6">
+            <table class="table table-sm mb-0">
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-right align-middle" style="width: 100px;">CUIT :</th>
+                  <td>{{personaSelected.cuit}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-right align-middle" style="width: 100px;">Tp.IVA :</th>
+                  <td>{{personaSelected.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+  <section id="browsePersonas" class="browse">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 300px;">Nombre</th>
+          <th scope="col" style="width: 180px;">Teléfono</th>
+          <th scope="col" style="width: 200px;">e-Mail</th>
+          <th scope="col">Direccion</th>
+        </tr>
+      </thead>
+      <tbody id='personaList'>
+        <tr *ngFor="let persona of personasList; index as i" (click)="select(persona)">
+          <td>{{persona.apellido}} {{persona.nombre}}</td>
+          <td>{{persona.celular}} {{persona.telefono}}</td>
+          <td>{{persona.email}}</td>
+          <td>{{persona.direccion}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

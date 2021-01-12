@@ -1,0 +1,98 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+  <header class="bg-light clearfix">
+    <a routerLink="/personas" class="btn btn-sm btn-outline-warning float-right">Cancel</a>
+  </header>
+</div>
+<div style="height: 100%;" [hidden]="done">
+  Procesando....
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <div [hidden]="edit">
+          Creando una cuenta
+        </div>
+        <div [hidden]="!edit">
+          Modificando una cuenta
+        </div>
+      </div>
+      <div class="card-body">
+        <form>
+          <div [hidden]="edit">
+            <div class="form-group" >
+              <input type="text" class="form-control" name="email" [(ngModel)]="persona.email"
+                placeholder="Ingrese su correo electrónico (e-Mail)">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" name="cuit" [(ngModel)]="persona.cuit"
+                  placeholder="Ingrese Nro de C.U.I.T">
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="form-group" [hidden]="!edit" >
+            <input type="text" class="form-control" name="emailfix" [(ngModel)]="persona.email"
+              placeholder="Ingrese su correo electrónico (e-Mail)" disabled>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <input type="firstname" class="form-control" name="nombre" [(ngModel)]="persona.nombre"
+                placeholder="Ingrese su Nombre/s">
+            </div>
+            <div class="form-group col-md-5">
+              <input type="lastname" class="form-control" name="apellido" [(ngModel)]="persona.apellido"
+                placeholder="Ingrese su Apellido/s">
+            </div>
+            <div class="form-group col-md-2">
+              <input type="number" class="form-control" name="coeficiente" [(ngModel)]="persona.coeficiente"
+                placeholder="Coeficiente">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="mobile" class="form-control" name="celular" [(ngModel)]="persona.celular"
+                placeholder="Nro Celular">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="phone" class="form-control" name="fijo" [(ngModel)]="persona.fijo"
+                placeholder="Nro Teléfono Fijo">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="addres" class="form-control" name="direccion" [(ngModel)]="persona.direccion"
+              placeholder="Dirección">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="zipcode" class="form-control" name="zipcode" [(ngModel)]="persona.zipcode"
+                placeholder="Código Postal">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="city" class="form-control" name="localidad" [(ngModel)]="persona.localidad"
+                placeholder="Localidad">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="state" class="form-control" name="provincia" [(ngModel)]="persona.provincia"
+                placeholder="Provincia">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="country" class="form-control" name="pais" [(ngModel)]="persona.pais" placeholder="País">
+            </div>
+          </div>
+        </form>
+        <div class="form-group" [hidden]="edit">
+          <button class="btn btn-primary btn-block" (click)="add()">Crear la Cuenta</button>
+        </div>
+        <div class="form-group" [hidden]="!edit">
+          <button class="btn btn-primary btn-block" (click)="update()">Modificar la Cuenta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

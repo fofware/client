@@ -1,0 +1,18 @@
+<div class="card mb-2">
+  <div class="card-header d-md-flex justify-content-between align-item-center">
+    <div>
+      ( {{index}} ) {{task.titulo}}
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="task.hide = !task.hide">
+        Mostrar
+      </button>
+      <button class="btn btn-danger" (click)="delete(index)">
+        Borrar
+      </button>
+    </div>
+  </div>
+  <div class="card-body" [hidden]="task.hide">
+    {{task.descripcion}}
+  </div>
+</div>

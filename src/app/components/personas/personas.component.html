@@ -1,0 +1,53 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+  <header class="bg-light clearfix">
+    <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar por Nombre" aria-label="Search" name="searchItem" (input)="search()"  [(ngModel)]="searchItem" >
+      </form>
+      <a [routerLink]="['/persona/add']" class="btn btn-sm btn-outline-primary float-right">Agregar</a>
+    </nav>
+
+
+
+  </header>
+</div>
+<div class="p-2" *ngFor="let persona of regList;">
+  <div class="card mb-1">
+    <div class="card-header p-1 d-flex justify-content-between align-items-center">
+      <h5>
+        <div>{{persona.apellido}}&nbsp;{{persona.nombre}} </div>
+      </h5>
+      <div>
+        <a class="btn btn-warning" [routerLink]="['/persona/edit/', persona._id]"><i class="fa fa-pencil"
+            aria-hidden="true"></i></a>
+        <button class="btn btn-danger" (click)="delete(persona._id)"><i class="fa fa-trash"
+            aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="row px-1">
+        <div class="col-lg-4"> 
+          <div class="d-flex justify-content-left align-items-left flex-wrap pt-0">
+            <div style="width: 150px;"><i class="fa fa-mobile fa-fw"></i> {{persona.celular}} </div>
+            <div style="width: 150px;"><i class="fa fa-phone fa-fw"></i> {{persona.fijo}} </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="pt-0">
+            <i class="fa fa-envelope-o fa-fw"></i> {{persona.email}} 
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="pt-0">
+            {{persona.direccion}} 
+            ({{persona.zipcode}})
+            {{persona.localidad}}
+            {{persona.provincia}}
+            {{persona.pais}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

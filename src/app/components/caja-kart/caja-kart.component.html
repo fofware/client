@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <div class="imgBox row">
+      <img src="{{item.producto.image}}" alt="...">
+    </div>
+    </div>
+    <div class="col-md-8" style="font-size:larger; font-weight: bold; text-shadow: rgb(255, 255, 255) 3px 0px 0px, rgb(255, 255, 255) 2.83487px 0.981584px 0px, rgb(255, 255, 255) 2.35766px 1.85511px 0px, rgb(255, 255, 255) 1.62091px 2.52441px 0px, rgb(255, 255, 255) 0.705713px 2.91581px 0px, rgb(255, 255, 255) -0.287171px 2.98622px 0px, rgb(255, 255, 255) -1.24844px 2.72789px 0px, rgb(255, 255, 255) -2.07227px 2.16926px 0px, rgb(255, 255, 255) -2.66798px 1.37182px 0px, rgb(255, 255, 255) -2.96998px 0.42336px 0px, rgb(255, 255, 255) -2.94502px -0.571704px 0px, rgb(255, 255, 255) -2.59586px -1.50383px 0px, rgb(255, 255, 255) -1.96093px -2.27041px 0px, rgb(255, 255, 255) -1.11013px -2.78704px 0px, rgb(255, 255, 255) -0.137119px -2.99686px 0px, rgb(255, 255, 255) 0.850987px -2.87677px 0px, rgb(255, 255, 255) 1.74541px -2.43999px 0px, rgb(255, 255, 255) 2.44769px -1.73459px 0px, rgb(255, 255, 255) 2.88051px -0.838247px 0px;">
+      <div class="card-body">
+        <div class="float-right">
+          <button class="btn btn-danger">
+            <i class="fa fa-trash" (click)="sustract()"></i>
+          </button>
+
+        </div>
+        <div class="card-text">{{item.producto.name}}</div>
+        <form>
+          <div>
+            <input *ngIf="item.producto.pesable" 
+            type="text" 
+            name="item{{index}}importe"
+            placeholder=""
+            (change)="calcula_peso()" 
+            [(ngModel)]="item.importe"><span *ngIf="item.producto.pesable">$ Compra</span>
+          </div>
+          <div>
+            <input type="text" 
+            name="item{{index}}cantidad" 
+            (change)="recalculate()" 
+            [(ngModel)]="item.cantidad"> 
+            <span *ngIf="item.producto.pesable">{{item.producto.unidad}}</span>
+            <span *ngIf="!item.producto.pesable">Un</span>
+          </div>
+          <div>
+            <input type="text" 
+            name="item{{index}}precio" 
+            (change)="calcula_peso()" 
+            [(ngModel)]="item.valores.precio"><span>$</span>
+          </div>
+          <div>
+            <input type="text" 
+            name="item{{index}}descuento" 
+            (change)="recalculate()" 
+            [(ngModel)]="item.descuento">
+          </div>
+        
+        </form>
+        <p class="card-text"><small class="text-muted">
+            <span>{{item.valores.total}}</span> </small></p>
+      </div>
+    </div>
+  </div>
+</div>

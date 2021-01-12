@@ -1,0 +1,176 @@
+<div id='main' (window:resize)="onResize($event)">
+  <article>
+    <div id="comprobante">
+      <header>
+        <form class="form-inline" style="width: fit-content; display: unset;">
+          <input type="date" class="form-control mr-sm-2" name="fecha" [(ngModel)]="cmp.data.fecha">
+          <select name="pagoTipo" class="form-control mr-sm-2"
+            [hidden]="cmp.data.tipo=='compra'"
+            (change)="changePago()" [(ngModel)]="cmp.data.pagoTipo">
+            <option value="{{n}}" *ngFor="let pago of tpPagos;index as n">{{pago.name}}</option>
+          </select>
+          <select name="listaTipo" class="form-control mr-sm-2" 
+            [hidden]="cmp.data.tipo=='compra'"
+            (change)="changeLista()" [(ngModel)]="cmp.data.listaTipo">
+            <option value="{{j}}" *ngFor="let lista of tpLista;index as j">{{lista.name}}</option>
+          </select>
+        </form>
+        <label class="btn btn-secondary mt-2" (click)="changeView(2)">
+          <strong>{{cmp.data.persona.name}}</strong>
+        </label>
+        <div class="float-right">
+          <div class="btn-group btn-group-toggle mt-2" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="optionsKart" id="optionKart" checked [(ngModel)]="showKart"
+                (click)="changeView(1)"> Items
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="optionsPago" id="option3" [(ngModel)]="showPago"
+                (click)="changeView(3)">Controlar
+            </label>
+          </div>
+        </div>
+      </header>
+      <div class="items" id="itemsCmp" style="position: relative;">
+        <h1 [hidden]="showPago || showPersona" class="display-2"
+          style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;">
+          Comprobante de {{cmp.data.tipo}}</h1>
+        <!--        <app-comprobantes-items [hidden]='!showKart' *ngFor="let item of cmp.items; index as i;" [index]="i" -->
+        <app-comprobantes-items [hidden]="showPago" *ngFor="let item of cmp.data.items; index as i;" [index]="i"
+          [item]="item" (onChangeItemCmp)="recalcula()" (onDeleteItemCmp)="deleteProducto($event)">
+        </app-comprobantes-items>
+        <div [hidden]='!showPago'>
+          {{cmp.data.tipo}}
+          {{cmp.data.persona.name}}
+          {{cmp.data.sumaTotal}}
+          <!--
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: unset;">#</th>
+                <th scope="col">Descripcion</th>
+                <th align="right" scope="col" style="text-align: right;">Precio Un</th>
+                <th scope="col" style="text-align: right;">Ajuste</th>
+                <th scope="col" style="text-align: right;">Cant</th>
+                <th scope="col" style="text-align: right;">Sub-Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cmp.data.items; index as i">
+                <td scope="row">{{i+1}}</td>
+                <td>{{item.data.producto.name}}</td>
+                <td align="right">{{ item.data.precio | number }}</td>
+                <td align="right">{{item.data.descuento + item.data.a_pago + item.data.a_persona | number }}</td>
+                <td align="right">{{item.data.cantidad | number }}</td>
+                <td align="right">{{item.data.sumaNeto | number }}</td>
+              </tr>
+            </tbody>
+          </table>
+-->
+          <div>
+            <ul class="list-group">
+              <li *ngFor="let item of cmp.data.items; index as i" class="media" style="padding: 0rem 1rem;">
+                <div class="align-self-center d-flex justify-content-center align-items-center flex-wrap" style="width: 120px; height: 120px;">
+                  <img style="width: auto; height: 100%;"
+                  
+                  src="{{item.data.producto.image}}" alt="">
+                </div>
+                <div class="media-body">
+                  <div class="d-flex justify-content-between align-items-center"
+                    style="font-size: larger; font-weight: bold;">
+                    {{item.data.producto.fullName}}
+                    <!--($ {{ item.data.precio | number }})-->
+                    <span style="width: 7rem; text-align: right;">${{ item.data.sumaBruto | number }}</span>
+                  </div>
+                  <ul>
+
+                    <li *ngIf="item.data.a_persona != 0">
+                      <small class="row">
+                        <div class="col-6">
+                          Ajuste cuenta {{cmp.data.persona.name}}
+                        </div>
+                        <div class="col-2 text-right">
+                          <span>{{item.data.a_persona}}</span>
+                        </div>
+                        <div class="col-2 text-right">
+                          <span>{{item.valores.totalA_persona}}</span>
+                        </div>
+                      </small>
+                    </li>
+                    <li *ngIf="item.data.a_pago != 0">
+                      <small class="row">
+                        <div class="col-6">
+                          Ajuste x pago {{cmp.data.ca_pago.name}}
+                        </div>
+                        <div class="col-2 text-right">
+                          <span>{{item.data.a_pago}}</span>
+                        </div>
+                        <div class="col-2 text-right">
+                          <span>{{item.valores.totalA_pago}}</span>
+                        </div>
+                      </small>
+                    </li>
+
+                    <li>
+                      <small class="row">
+                        <div class="col-6">
+                          <span>{{item.data.cantidad}} {{item.data.producto.name.replace(item.data.producto.art_name,"")}} de <span [hidden]="item.data.rPrecio==item.data.producto.precio">
+                            ${{item.data.precio}} &nbsp; a </span>
+                            <strong>${{item.data.rPrecio}}</strong></span>
+                        </div>
+                        <div class="col-2 text-right">
+                        </div>
+                        <div class="col-2 text-right">
+                          <span> {{item.data.sumaPrecio}} </span>
+                        </div>
+                      </small>
+                    </li>
+                    <li *ngIf="item.data.descuento != 0">
+                      <small class="row">
+                        <div class="col-6">
+                          Ajuste extra
+                        </div>
+                        <div class="col-2 text-right">
+                        </div>
+                        <div class="col-2 text-right">
+                          <span>{{item.data.descuento}}</span>
+                        </div>
+                      </small>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="float-left">
+          <h4>Bultos: {{cmp.data.bultos}}</h4>
+        </div>
+        <div class="float-right">
+          <h4>Total: $ {{cmp.data.sumaTotal}}</h4>
+        </div>
+      </footer>
+    </div>
+  </article>
+
+  <!--nav [hidden]="!showPago" id="pagoCheckOut"></nav-->
+
+  <aside id="browseArticulos" class="{{cmp.data.tipo}}">
+    <app-articulo-card-select 
+      [setting]="articuloSetting" 
+      [cmpTipo]='cmpSetting.tipo' 
+      [ca_pago]='cmp.data.ca_pago.value'
+      [ca_persona]='cmp.data.persona.coeficiente' 
+      [ca_lista]='cmp.data.ca_lista' 
+      [hidden]="!showArticulos" (onArticuloSelect)="addProducto($event)">
+    </app-articulo-card-select>
+    <app-personas-select [hidden]='!showPersona' [selectedPersona]="cmp.data.persona"
+      (onSelectPersona)="setPersona($event)">
+    </app-personas-select>
+    <app-checkout id="myPay" [hidden]='!showPago' [cmp]='cmp'
+    (onSave)="grabar()"></app-checkout>
+  </aside>
+</div>

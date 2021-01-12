@@ -1,0 +1,327 @@
+/*
+body {
+  font: 24px Helvetica;
+  background: #999999;
+ }
+*/
+ #main {
+  height: 99.8%;
+  margin: 0px;
+  padding: 0px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-flex-flow: row;
+          flex-flow: row;
+}
+
+ #main > article {
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+/*
+  background: #dddd88;
+*/
+  -webkit-flex: 3 1 60%;
+          flex: 3 1 60%;
+  -webkit-order: 2;
+          order: 2;
+  overflow: auto;
+}
+ 
+ #main > nav {
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #8888bb;
+  border-radius: 7pt;
+  min-width:430px;
+  max-width:430px;
+  background: #ccccff;
+  -webkit-flex: 1 6 20%;
+          flex: 1 6 20%;
+  -webkit-order: 1;
+          order: 1;
+  }
+ 
+ #main > aside {
+  display: none;
+  margin: 4px;
+  padding: 5px;
+  border: 1px solid #8888bb;
+  border-radius: 7pt;
+  background: #ccccff;
+  -webkit-flex: 1 6 20%;
+          flex: 1 6 20%;
+  -webkit-order: 3;
+          order: 3;
+  }
+
+ header, footer {
+  display: block;
+  margin: 4px;
+  padding: 5px;
+  min-height: 50px;
+  border: 1px solid #222222;
+  border-radius: 7pt;
+  background: #444444;
+  }
+
+  #control {
+    height: 99.8%;
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: column;
+            flex-flow: column;
+  }
+  #control > footer {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    min-height: 220px;
+    max-height: 220px;
+    border: 1px solid #eebb55;
+    border-radius: 7pt;
+    background: #ffeebb;
+    -webkit-flex: 3 1 40%;
+            flex: 3 1 40%;
+    -webkit-order: 3;
+            order: 3;
+    overflow: auto;
+  }
+  #control > section {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #cccc33;
+    border-radius: 7pt;
+  /*
+    background: #dddd88;
+  */
+    -webkit-flex: 3 1 60%;
+            flex: 3 1 60%;
+    -webkit-order: 1;
+            order: 1;
+    overflow: auto;
+  }
+  #panelcontrol {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: row;
+            flex-flow: row;
+  }
+  #panelcontrol > .pagos {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #994433;
+    border-top-left-radius: 7pt;
+    border-bottom-left-radius: 7pt;
+  /*
+    background: #dddd88;
+  */
+    -webkit-flex: 3 1 40%;
+            flex: 3 1 40%;
+    -webkit-order: 1;
+            order: 1;
+
+  }
+  #panelcontrol > .teclado {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #ee5533;
+    border-bottom-right-radius: 7pt;
+    border-top-right-radius: 7pt;
+  /*
+    background: #dddd88;
+  */
+    -webkit-flex: 3 1 60%;
+            flex: 3 1 60%;
+    -webkit-order: 2;
+            order: 2;
+
+  }
+  .tecla {
+    width: 58px;
+    height: 52px;
+    border: 1px solid #0066ff;
+    font-size: x-large;
+    font-weight: bold;
+    color: #555555
+  }
+  .teclasmall {
+    font-size: larger;
+  }
+  #kart {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: column;
+            flex-flow: column;
+  }
+  #kart > .itemskart{
+    margin: 0px;
+    padding: 0px;
+  /*
+    border: 1px solid #ee5533;
+    border-bottom-right-radius: 7pt;
+    border-top-right-radius: 7pt;
+    background: #dddd88;
+  */
+    overflow: auto;
+    -webkit-flex: 3 1 80%;
+            flex: 3 1 80%;
+    -webkit-order: 1;
+            order: 1;
+  }
+  #kart > .totalkart{
+    margin: 0px;
+    padding: 5px;
+    max-height: 80px;
+    min-height: 80px;
+    border: 1px solid #bbbbdd;
+    border-bottom-left-radius: 7pt;
+    border-bottom-right-radius: 7pt;
+    background: #bbbbdd;
+    color: #444444;
+    font-size: x-large;
+    font-weight: 600;
+    -webkit-flex: 3 1 20%;
+            flex: 3 1 20%;
+    -webkit-order: 2;
+            order: 2;
+  }
+/* Too narrow to support three columns */
+ @media all and (max-width: 640px) {
+ 
+  #main, #page {
+   -webkit-flex-flow: column;
+           flex-flow: column;
+  }
+
+  #main > article, #main > nav, #main > aside {
+   /* Return them to document order */
+   -webkit-order: 0;
+           order: 0;
+  }
+ 
+  #main > nav, #main > aside, header, footer {
+   min-height: 50px;
+   max-height: 50px;
+  }
+ }
+/*
+.sidebar-container {
+  position: fixed;
+  width: 410px;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #1a1a1a;
+  color: #fff;
+}
+.sidebar-logo {
+  padding: 10px 15px 10px 30px;
+  font-size: 20px;
+  width: 410px;
+  background-color: #2574A9;
+}
+
+.sidebar-navigation {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+.sidebar-navigation li {
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 20px;
+}
+
+.sidebar-navigation li a {
+  padding: 10px 15px 10px 30px;
+  display: block;
+  color: #fff;
+}
+
+.sidebar-navigation li .fa {
+  margin-right: 10px;
+}
+
+.sidebar-navigation li a:active,
+.sidebar-navigation li a:hover,
+.sidebar-navigation li a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.sidebar-navigation li::before {
+  background-color: #2574A9;
+  position: absolute;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+
+.sidebar-navigation li:hover::before {
+  width: 100%;
+}
+
+.sidebar-navigation .header {
+  font-size: 12px;
+  text-transform: uppercase;
+  background-color: #151515;
+  padding: 10px 15px 10px 30px;
+  z-index: 20000;
+}
+
+.sidebar-navigation .header::before {
+  background-color: transparent;
+}
+
+.content-container {
+  padding-top: 60px;
+  padding-left: 410px;
+  width: 99.7%;
+}
+
+.container-teclado {
+  position: relative;
+  border:black 1px solid; 
+  height: 100%;
+  width: 100%;
+}
+.cliente{
+  position: relative;
+  width: 150px;
+  height: 100%;
+  border:red 1px solid; 
+}
+.teclado {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  max-width: 218px;
+  border:black 1px solid; 
+  height: 100%;
+ }
+ .tecla{
+   width:50px;
+   height:50px;
+   border:black 1px solid; 
+  }
+  */

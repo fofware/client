@@ -1,0 +1,27 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+</div>
+<ng-container *ngIf="taskService.haveStorage(); else noStorage" >
+
+<div class="container pt-2">
+  <div class="row">Este es un ejemplo del uso del LocalStorage del Browser</div>
+  <div class="row">Usando como guia el video de&nbsp;<a href="https://www.youtube.com/watch?v=9gobcLDJE3g"> Fazt Code en
+      YouTube</a> </div>
+  <div class="row">
+    <div class="col-md-5 text-center">
+      <app-task-form></app-task-form>
+    </div>
+    <div class="col-md-7">
+      <app-task-list></app-task-list>
+    </div>
+  </div>
+</div>
+</ng-container>
+<ng-template #noStorage>
+  <div class="card">
+    <div class="card-body">
+      <h3 card-title>LocalStorage No Soportado</h3>
+      <p>Este dispositivo parece no soportar localStorage</p>
+    </div>
+  </div>
+</ng-template>

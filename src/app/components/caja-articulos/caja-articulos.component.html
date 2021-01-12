@@ -1,0 +1,11 @@
+<div class="caja-box btn btn-outline-primary ml-1 mb-1 app-btn" (click)="onClick(articulo)" >
+  <h3 class="stock" aria-hidden="true">{{articulo.producto.stock}} </h3>
+  <i class="pesable fa fa-balance-scale fa-fw fa-2x" aria-hidden="true" [hidden]="!articulo.producto.pesable"></i>
+  <img class="caja-img" src="{{articulo.producto.image}}" alt="">
+  <div class="nombre">
+    {{articulo.producto.name}}
+  </div>
+  <div class="precio w-100">
+    <h1>${{articulo.valores.precio}}</h1>
+  </div>
+</div>

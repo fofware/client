@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-body pt-0 pb-0">
+    <div class="row">
+      <div class="col-2">
+        <div class="d-flex align-items-center justify-content-center flex-nowrap h-100">
+          <div style="height: 100px;">
+            <img class="h-100" src="{{item.producto.image}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-10 pr-0 pl-0">
+        <h5>{{item.producto.name}}</h5>
+        <div class="form">
+          <div class="form-row justify-content-end">
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">x$</div>
+                </div>
+                <input type="number" class="form-control" style="width:110px; text-align: right;"
+                  name="itemCompra_{{index}}" placeholder="Importe Cpra" (change)="calcularSubTot()"
+                  [(ngModel)]="item.valores.importe" aria-describedby="compraHelp">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Cn</div>
+                </div>
+              <input type="number" class="form-control" 
+                placeholder="Cnt"
+                style="width:90px; text-align: right;" name="itemCantidad_{{index}}" (change)="calcularSubTot()"
+                [(ngModel)]="item.cantidad">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">&nbsp;$</div>
+                </div>
+                <input type="number" class="form-control" style="width:110px; text-align: right;"
+                  name="itemPrecio_{{index}}" placeholder="Precio" (change)="calcularSubTot()"
+                  [(ngModel)]="item.precio" aria-describedby="precioHelp">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">-$</div>
+                </div>
+                <input type="number" class="form-control" style="width:110px; text-align: right;"
+                  name="itemDescuento_{{index}}" placeholder="Descuento" (change)="calcularSubTot()"
+                  [(ngModel)]="item.descuento" aria-describedby="precioHelp">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-danger mb-2" style="width: 148px;" (click)="delete()">
+                $ {{item.sumaTotal}} <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

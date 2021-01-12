@@ -1,0 +1,40 @@
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+  <header class="bg-light clearfix">
+    <a href="" class="btn btn-sm btn-outline-primary float-right">Agregar</a>
+  </header>
+</div>
+<div class="container pt-2">
+  <div class="row">
+    <div class='col-md-6' *ngFor="let m of prodList">
+      <div class="card mb-2 p-2" style='background-image: url({{m.background}}); font-weight: 500; color: {{m.color}}'>
+        <div class="row">
+          <div class="col-5">
+            <img src="{{m.image}}" alt="" class="card-img-top">
+          </div>
+          <div class="col">
+            <div>{{m.text}}</div>
+            <ng-container *ngIf="authService.loggedIn(); else presentaciones">
+            <div class="card border-0" style='font-weight: 400;'>
+              <div class="card-body p-0">
+                <div class="mt-2" style='font-weight: 500;'>Presentaciones:</div>
+                <div class="table-responsive-sm">
+                  <table class="table-sm w-100">
+                    <tr  *ngFor="let p of m.precio">
+                      <td> {{p.name}} </td>
+                      <td class="text-right">$&nbsp; {{p.precio}} </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+            <ng-template #presentaciones>
+              <div class="mt-2">{{m.presentaciones}}</div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

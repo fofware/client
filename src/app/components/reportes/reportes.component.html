@@ -1,0 +1,40 @@
+<header [hidden]="true">
+</header>
+<div id='main' (window:resize)="setHeight()">
+  <article>
+    
+  </article>
+  <nav>
+    <form class="form container no-gutters">
+      <div class="row">
+        <label 
+          for="fecha_desde" 
+          class="col-sm-5 col-form-label">Fecha Desde:</label>
+        <div class="col-sm-7">
+          <input type="date" 
+            class="form-control mr-sm-2" 
+            id="fecha_desde" 
+            name="fecha_desde" 
+            [(ngModel)]="fecha_desde">
+        </div>
+      </div>
+      <div class="row">
+        <label 
+          for="fecha_hasta" 
+          class="col-sm-5 col-form-label">Fecha Hasta:</label>
+        <div class="col-sm-7">
+          <input type="date" 
+            class="form-control mr-sm-2" 
+            id="fecha_hasta" 
+            name="fecha_hasta" 
+            [(ngModel)]="fecha_hasta">
+        </div>
+      </div>
+    </form>
+    <button class="btn btn-warning btn-block mt-2" (click)="detalleVtas()">Detalles Ventas</button>
+    <button class="btn btn-warning btn-block mt-2" (click)="totalDiario()">Total Diario</button>
+    <button class="btn btn-warning btn-block mt-2" (click)="totalProductos()">Articulos Vendidos</button>
+  </nav>
+  <aside [hidden]="true" ></aside>
+</div>
+<footer [hidden]="true">footer</footer>
