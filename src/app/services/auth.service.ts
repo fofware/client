@@ -7,13 +7,13 @@ import { AUTH_URI } from '../common/utils';
   providedIn: 'root'
 })
 export class AuthService {
-  
+
 //  private URL = 'https://192.168.0.2:3000';
   private URL = AUTH_URI;
-  
+
   constructor(
-    private httpClient: HttpClient
-    , private router: Router)  { }
+    private httpClient: HttpClient,
+    private router: Router)  { }
 
   signIn(user){
     return this.httpClient.post<any>(this.URL + '/signin', user);
@@ -33,6 +33,7 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigate(['/signin']);
   }
 }

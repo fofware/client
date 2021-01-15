@@ -1,15 +1,24 @@
 export interface iArticulo{
-  _id?: Object;
+  _id?: any;
+  fabricante?: string;
+  marca?: string;
+  rubro?: string;
+  linea?: string;
+  p_fabricante: boolean;
+  p_marca: boolean;
+  p_rubro: boolean;
+  p_linea: boolean;
   name?: string;
   image?: string;
   url?: string;
   iva?: number;
   margen?: number;
+
   productos?: [{
-    _id?:Object;
-    articulo?:Object;
-    name?:string;
-    parentname?:string;
+    _id?: any;
+    articulo?: any;
+    name?: string;
+    parentname?: string;
     contiene: number;
     unidad: string;
     precio: number;
@@ -22,4 +31,5 @@ export interface iArticulo{
     iva: number;
     margen: number;
   }];
+
 }

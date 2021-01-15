@@ -19,15 +19,15 @@ export class ArticulosService {
   }
   listProductos() {
     const obs = new Observable((observer) => {
-      const parameters = {Articulo:{},Producto:{precio: {$gt: 0}}}
-      this.http.post(`${this.ApiUri}/articulos/productos/list`,parameters)
+      const parameters = {Articulo: {}, Producto: {}, Extra: {}, Sort: {}};
+      this.http.post(`${this.ApiUri}/articulos/productos/list`, parameters)
       .subscribe( rpta => {
-        this.checkParent(rpta)
-        observer.next(rpta)
+        this.checkParent(rpta);
+        observer.next(rpta);
         // observable execution
-        observer.complete()
-      })
-    })
+        observer.complete();
+      });
+    });
     return obs;
   }
   listaSearchProd(parameters){
@@ -39,8 +39,8 @@ export class ArticulosService {
         observer.next(rpta)
         // observable execution
         observer.complete()
-      })
-    })
+      });
+    });
     return obs;
   }
   get(id: number){
@@ -63,24 +63,23 @@ export class ArticulosService {
     const obs = new Observable((observer) => {
       this.http.get(`${this.ApiUri}/articulos/productos/search/${search}`)
       .subscribe( rpta => {
-        this.checkParent(rpta)
-        observer.next(rpta)
+        this.checkParent(rpta);
+        observer.next(rpta);
         // observable execution
-        observer.complete()
-      })
-    })
+        observer.complete();
+      });
+    });
     return obs;
   }
   searchProductos(search: string): Observable<any>{
     const obs = new Observable((observer) => {
       this.http.get(`${this.ApiUri}/articulos/productos/search/${search}`).subscribe( rpta => {
-        this.checkParent(rpta)
-        observer.next(rpta)
+        this.checkParent(rpta);
+        observer.next(rpta);
         // observable execution
-        observer.complete()
-      })
-      
-    })
+        observer.complete();
+      });
+    });
     return obs;
   }
   newId(){

@@ -21,7 +21,7 @@ export class ArticuloFormComponent implements OnInit {
   producto: iProducto;
   prodList: iProducto[];
   del_List: iProducto[];
-  unidades: [{ id: Object, name: string }]
+  unidades: [{ id: any, name: string }]
 
   /*
   uVtatmp: {
@@ -152,7 +152,7 @@ export class ArticuloFormComponent implements OnInit {
           console.log( "producto ya existe", e )
           return
       }
-      
+
     }
     this.articulosService.newId().subscribe(ret => {
       this.producto.articulo = this.articulo._id;

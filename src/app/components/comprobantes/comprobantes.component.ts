@@ -11,24 +11,24 @@ import { ComprobantesService } from 'src/app/services/comprobantes.service';
 })
 
 export class ComprobantesComponent implements OnInit {
-  
+
   @Input() articuloSetting: any;
   @Input() cmpSetting: any;
 
-  showArticulos: boolean = true;
-  hiddenKart: boolean = false;
-  showKart: boolean = true;
-  showPersona: boolean = false;
-  showPago: boolean = false;
- 
-  tpPagos:any[] = tpPagos;
-  tpLista:any[] = tpLista;
+  showArticulos = true;
+  hiddenKart = false;
+  showKart = true;
+  showPersona = false;
+  showPago = false;
+
+  tpPagos: any[] = tpPagos;
+  tpLista: any[] = tpLista;
 
 
-  cmp: Comprobante; 
+  cmp: Comprobante;
 
   constructor(private comprobante: ComprobantesService
-    , private router: Router
+    ,         private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -40,16 +40,16 @@ export class ComprobantesComponent implements OnInit {
     const element = document.getElementsByTagName('html');
     const h = document.getElementsByTagName('html')[0].clientHeight;
     const b = h;
-    document.getElementsByTagName('aside')[0].style.height=`${b}px`;
-    document.getElementsByTagName('article')[0].style.height=`${b}px`;
+    document.getElementsByTagName('aside')[0].style.height = `${b}px`;
+    document.getElementsByTagName('article')[0].style.height = `${b}px`;
   }
 
   onResize(event){
-    this.setHeight()
+    this.setHeight();
   }
   totalizar(){
   }
-  getdate():string {
+  getdate(): string {
     const d = new Date();
     return [
       d.getFullYear(),
@@ -64,10 +64,10 @@ export class ComprobantesComponent implements OnInit {
     this.cmp.data.fecha = this.getdate();
   }
   addProducto(data: any){
-    this.cmp.add(data)
+    this.cmp.add(data);
     this.cmp.calcula();
     setTimeout(() => {
-      const objDiv = document.getElementById("itemsCmp");
+      const objDiv = document.getElementById('itemsCmp');
       objDiv.scrollTop = objDiv.scrollHeight;
     }, 50);
   }
@@ -77,7 +77,7 @@ export class ComprobantesComponent implements OnInit {
     this.cmp.deleteItem(idx);
     this.cmp.calcula();
   }
-  changeView(i:number){
+  changeView(i: number){
     this.showKart = false;
     this.showPago = false;
     this.showPersona = false;
@@ -87,28 +87,29 @@ export class ComprobantesComponent implements OnInit {
       case 2:
         this.showPersona = true;
         this.showArticulos = false;
-//        objDiv.style.display = "none"; 
+//        objDiv.style.display = "none";
         break;
       case 3:
         this.showPago = true;
-//        objDiv.style.display = "none"; 
+//        objDiv.style.display = "none";
         this.showArticulos = false;
-      break;
+        break;
       default:
         this.showKart = true;
         this.showArticulos = true;
 
-//        objDiv.style.display = "unset"; 
+//        objDiv.style.display = "unset";
         break;
     }
   }
   setPersona(event){
     this.cmp.data.persona = event;
-    if (!this.cmp.data.persona.name)
-      this.cmp.data.persona.name = `${this.cmp.data.persona.apellido} ${this.cmp.data.persona.nombre}`
-    const objDiv = document.getElementById("browseArticulos");
-    objDiv.style.display = "unset"; 
-    this.cmp.setClient()
+    if (!this.cmp.data.persona.name) {
+      this.cmp.data.persona.name = `${this.cmp.data.persona.apellido} ${this.cmp.data.persona.nombre}`;
+    }
+    const objDiv = document.getElementById('browseArticulos');
+    objDiv.style.display = 'unset';
+    this.cmp.setClient();
     this.showKart = true;
     this.showPago = false;
     this.showPersona = false;
@@ -122,38 +123,40 @@ export class ComprobantesComponent implements OnInit {
     this.cmp.setLista();
   }
   recalcula(){
-    console.log("recalcula");
+    console.log('recalcula');
     this.cmp.calcula();
   }
   grabar(){
-    let toSave = JSON.parse(JSON.stringify(this.cmp.data));
-    delete toSave.items; 
+    const toSave = JSON.parse(JSON.stringify(this.cmp.data));
+    delete toSave.items;
     const array = JSON.parse(JSON.stringify(this.cmp.data.items));
     toSave.items = [];
     for (let i = 0; i < array.length; i++) {
-      let e = JSON.parse(JSON.stringify(array[i].data));
+      const e = JSON.parse(JSON.stringify(array[i].data));
       e.name = e.producto.fullName;
       e.compra = e.producto.compra;
-      e.sumaCompra = round(e.compra * e.cantidad,decimales);
+      e.sumaCompra = round(e.compra * e.cantidad, decimales);
       e.reposicion = e.producto.reposicion;
-      e.sumaReposicion = round(e.reposicion * e.cantidad,decimales);
+      e.sumaReposicion = round(e.reposicion * e.cantidad, decimales);
       delete e.producto;
       toSave.items.push(JSON.parse(JSON.stringify(e)));
     }
-    this.changeView(1);
+    const usuario: any = JSON.parse(localStorage.get('user'));
+    toSave.operator = usuario._id;
 
-    console.log("Se manda al servidor");
+    console.log('Se manda al servidor');
     console.log(toSave);
 
     this.comprobante.save(toSave).subscribe(res => {
-      console.log("Respuesta Servidor");
+      console.log('Respuesta Servidor');
       console.log(res);
     },
     error => {
       console.log(error);
-    })
+    });
 
 //    console.log(location)
+    this.changeView(1);
     const tipo = this.cmp.data.tipo;
     this.cmp.storageDelete();
     this.cmpReset();
