@@ -1,19 +1,19 @@
-export interface iArticulo{
+export interface iArticulo {
   _id?: any;
-  fabricante?: string;
-  marca?: string;
-  rubro?: string;
-  linea?: string;
-  p_fabricante: boolean;
-  p_marca: boolean;
-  p_rubro: boolean;
-  p_linea: boolean;
+  fabricante: string;
+  marca: string;
+  rubro: string;
+  linea: string;
+  d_fabricante: boolean;
+  d_marca: boolean;
+  d_rubro: boolean;
+  d_linea: boolean;
   name?: string;
   image?: string;
   url?: string;
   iva?: number;
   margen?: number;
-
+/*
   productos?: [{
     _id?: any;
     articulo?: any;
@@ -31,5 +31,5 @@ export interface iArticulo{
     iva: number;
     margen: number;
   }];
-
+*/
 }

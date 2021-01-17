@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { iArticulo } from '../models/iArticulo';
 import { API_URI } from '../common/utils';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,11 @@ export class ArticulosService {
     return this.http.get(`${this.ApiUri}/articulos/list`);
   }
   listProductos() {
+    const parameters = {Articulo: {}, Producto: {}, Extra: {}, Sort: {}};
     const obs = new Observable((observer) => {
-      const parameters = {Articulo: {}, Producto: {}, Extra: {}, Sort: {}};
       this.http.post(`${this.ApiUri}/articulos/productos/list`, parameters)
       .subscribe( rpta => {
-        this.checkParent(rpta);
+//        this.checkParent(rpta);
         observer.next(rpta);
         // observable execution
         observer.complete();
@@ -33,7 +34,7 @@ export class ArticulosService {
   listaSearchProd(parameters){
     console.log(parameters)
     const obs = new Observable((observer) => {
-      this.http.post(`${this.ApiUri}/articulos/productos/list`,parameters)
+      this.http.post(`${this.ApiUri}/articulos/productos/list`, parameters)
       .subscribe( rpta => {
         this.checkParent(rpta)
         observer.next(rpta)
@@ -55,8 +56,8 @@ export class ArticulosService {
   add(articulo: iArticulo ){
     return this.http.post(`${this.ApiUri}/articulo`, articulo);
   }
-  update(id: Object, updatedArticulo: iArticulo ): Observable<iArticulo>{
-    console.log(updatedArticulo)
+  update(id: any, updatedArticulo: iArticulo ): Observable<any>{
+    console.log(updatedArticulo);
     return this.http.put(`${this.ApiUri}/articulo/${id}`, updatedArticulo );
   }
   search(search: string): Observable<any>{

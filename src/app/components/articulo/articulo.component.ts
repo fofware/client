@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { iArticulo } from 'src/app/models/iArticulo';
 import { ArticulosService } from 'src/app/services/articulos.service';
 import { Router } from '@angular/router';
-//import { jsPDF } from 'jspdf';
+// import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-articulo',
@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ArticuloComponent implements OnInit {
 
-  articuloList: iArticulo[];
+  articuloList: any[];
   searchItem: string;
-  wait: boolean = false;
+  wait = false;
 
   constructor(
     private articulosService: ArticulosService,
@@ -25,17 +25,13 @@ export class ArticuloComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  list() {
-    const rpta = this.articulosService.listProductos().subscribe(
-      res => {
-//        console.log(res)
-        this.wait = false;
-        this.articuloList = <any>res;
-      }
-      , err => {
-        console.log(err);
-      }
-    )
+  async list() {
+    this.articulosService.listProductos().subscribe( ret => {
+      const rpta: any = ret;
+      this.articuloList = rpta;
+      console.log(this.articuloList);
+    });
+
   }
   delete(i: string) {
     if (confirm('Esta Seguro que quiere borrar este registro')) {
@@ -43,57 +39,48 @@ export class ArticuloComponent implements OnInit {
         this.list();
       },
         err => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     }
   }
-/*
-  get(i: number) {
-    this.articulosService.get(i).subscribe(res => {
-      this.list();
-    },
-      err => {
-        console.log(err);
-      })
-  }
-*/
+
   search() {
-    if (this.wait) return;
-    if (this.searchItem.length == 0) {
+    if (this.wait) { return; }
+    if (this.searchItem.length === 0) {
       this.list();
       this.wait = false;
       return;
     }
     //    if (this.searchItem.length > 2) {
-      this.wait = true;
-      this.articulosService.searchProductos(this.searchItem).subscribe(
+    this.wait = true;
+    this.articulosService.searchProductos(this.searchItem).subscribe(
         res => {
-          this.articuloList = <any>res;
+          this.articuloList = (res as any);
           this.wait = false;
         },
         err => {
           console.log(err);
           this.wait = true;
         }
-      )
+      );
 //    }
   }
   opModal(){
     const modal = document.getElementById('apiError');
-    modal.style.display = "block";
+    modal.style.display = 'block';
   }
   createHeaders(keys) {
     return keys.map(key => ({
-      'name': key,
-      'prompt': key,
-      'width': 65,
-      'align': 'center',
-      'padding': 0
+      name: key,
+      prompt: key,
+      width: 65,
+      align: 'center',
+      padding: 0
     }));
   }
-  
+
   print(){
-/*    
+/*
     let data = [];
     for (let i = 0; i < this.articuloList.length; i++) {
       const a:any = this.articuloList[i];
@@ -107,7 +94,7 @@ export class ArticuloComponent implements OnInit {
 
       for (let n = 0; n < a.productos.length; n++) {
         const p = a.productos[n];
-        if(a.productos[n].pesable && a.productos[n].stock == 0) a.productos[n].stock = sumStock; 
+        if(a.productos[n].pesable && a.productos[n].stock == 0) a.productos[n].stock = sumStock;
         const line = {
           name: `${a.name} ${p.parentname}`
           ,precio: `${p.precio}` //.toString()
@@ -117,7 +104,7 @@ export class ArticuloComponent implements OnInit {
       }
     }
     const headers:any = [
-      { 
+      {
         'name': 'name',
         'prompt': 'Artículo',
         'width': 475,

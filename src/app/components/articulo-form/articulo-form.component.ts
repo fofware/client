@@ -34,10 +34,10 @@ export class ArticuloFormComponent implements OnInit {
   }
 */
   constructor(
-    private articulosService: ArticulosService
-    , private productosService: ProductosService
-    , private router: Router
-    , private activatedRouter: ActivatedRoute
+    private articulosService: ArticulosService,
+    private productosService: ProductosService,
+    private router: Router,
+    private activatedRouter: ActivatedRoute
   ) {
     this.done = true;
     this.edit = false;
@@ -51,8 +51,8 @@ export class ArticuloFormComponent implements OnInit {
           , stock: false
         };
     */
-    this.inputData = {};
-    this.articulo = {};
+//    this.inputData = {};
+//    this.articulo = {};
     this.producto = {};
     this.prodList = [];
     this.del_List = [];
@@ -68,7 +68,7 @@ export class ArticuloFormComponent implements OnInit {
       },
         err => {
           console.log(err);
-        })
+        });
 
       this.edit = false;
       this.done = true;
@@ -78,17 +78,19 @@ export class ArticuloFormComponent implements OnInit {
   ngOnInit(): void { }
 
   productoReset() {
-    this.producto = {}
+    this.producto = {};
   }
 
   find(id) {
     this.articulosService.getProductos(id).subscribe(
       res => {
         this.done = true;
-        this.inputData = res;
-        this.articulo = res;
+//        this.inputData = res;
+        const algo: any = res;
+        this.articulo = algo;
+/*
         this.prodList = this.articulo.productos;
-        delete this.articulo.productos;
+//        delete this.articulo.productos;
         for (let index = 0; index < this.prodList.length; index++) {
           const e = this.prodList[index];
           this.prodList[index].parentname = this.readParent(e.parent);
@@ -99,10 +101,11 @@ export class ArticuloFormComponent implements OnInit {
           else this.unidades.push(unid);
         }
         this.productoReset();
+*/
       },
       err => {
         this.done = true;
-        console.log(err)
+        console.log(err);
       }
     );
   }
@@ -110,6 +113,21 @@ export class ArticuloFormComponent implements OnInit {
   update() {
     //    if(this.del_List.length > 0)
     //      this.productosService.deleteMany(this.del_List)
+    this.articulosService
+    .update(this.articulo._id, this.articulo)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.done = true;
+        this.router.navigate(['/articulos']);
+      }
+      , err => {
+        console.log(err);
+      }
+    );
+/*
+
+
     this.productosService
     .update(this.prodList)
     .subscribe(rpta => {
@@ -127,7 +145,8 @@ export class ArticuloFormComponent implements OnInit {
     },
       err => {
         console.log(err);
-    })
+    });
+  */
   }
 
   add() {

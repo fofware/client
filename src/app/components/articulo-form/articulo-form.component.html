@@ -5,31 +5,53 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-8">
-            <!--div class="form-group"-->
-            <input type="text" class="form-control" name="fabricante" placeholder="Fabricante"
+          <div class="col-3">
+              <input type="text" class="form-control" name="fabricante" placeholder="Fabricante"
               [(ngModel)]="articulo.fabricante">
-            <!--/div-->
           </div>
-          <div class="col-8">
+          <div class="col-1">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="d_fabricante"
+                [(ngModel)]="articulo.d_fabricante">
+            </div>
+          </div>
+          <div class="col-3">
             <!--div class="form-group"-->
             <input type="text" class="form-control" name="marca" placeholder="Marca"
               [(ngModel)]="articulo.marca">
             <!--/div-->
           </div>
-          <div class="col-8">
+          <div class="col-1">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="d_marca"
+                [(ngModel)]="articulo.d_marca">
+            </div>
+          </div>
+          <div class="col-3">
             <!--div class="form-group"-->
             <input type="text" class="form-control" name="rubro" placeholder="Rubro"
               [(ngModel)]="articulo.rubro">
             <!--/div-->
           </div>
-          <div class="col-8">
+          <div class="col-1">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="d_rubro"
+                [(ngModel)]="articulo.d_rubro">
+            </div>
+          </div>
+          <div class="col-3">
             <!--div class="form-group"-->
             <input type="text" class="form-control" name="linea" placeholder="Linea"
               [(ngModel)]="articulo.linea">
             <!--/div-->
           </div>
-          <div class="col-8">
+          <div class="col-1">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="d_linea"
+                [(ngModel)]="articulo.d_linea">
+            </div>
+          </div>
+          <div class="col-4">
             <!--div class="form-group"-->
             <input type="text" class="form-control" name="name" placeholder="Nombre del Artículo"
               [(ngModel)]="articulo.name">
