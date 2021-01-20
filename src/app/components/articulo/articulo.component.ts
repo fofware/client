@@ -20,6 +20,7 @@ export class ArticuloComponent implements OnInit {
     private router: Router
   ) {
     this.list();
+//    this.searchItem = JSON.parse(localStorage.get('articuloSearchItem'));
   }
 
   ngOnInit(): void {

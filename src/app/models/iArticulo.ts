@@ -1,3 +1,4 @@
+// tslint:disable-next-line:class-name
 export interface iArticulo {
   _id?: any;
   fabricante: string;
@@ -8,12 +9,12 @@ export interface iArticulo {
   d_marca: boolean;
   d_rubro: boolean;
   d_linea: boolean;
+  private_web: boolean;
   name?: string;
   image?: string;
   url?: string;
   iva?: number;
   margen?: number;
-/*
   productos?: [{
     _id?: any;
     articulo?: any;
@@ -31,5 +32,5 @@ export interface iArticulo {
     iva: number;
     margen: number;
   }];
-*/
+
 }

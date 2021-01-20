@@ -19,7 +19,9 @@ export class ArticulosService {
     return this.http.get(`${this.ApiUri}/articulos/list`);
   }
   listProductos() {
-    const parameters = {Articulo: {}, Producto: {}, Extra: {}, Sort: {}};
+    const parameters = {Articulo: {}, Producto: {}};
+//    const parameters = {};
+    console.log(parameters);
     const obs = new Observable((observer) => {
       this.http.post(`${this.ApiUri}/articulos/productos/list`, parameters)
       .subscribe( rpta => {
@@ -32,14 +34,14 @@ export class ArticulosService {
     return obs;
   }
   listaSearchProd(parameters){
-    console.log(parameters)
+    console.log(parameters);
     const obs = new Observable((observer) => {
       this.http.post(`${this.ApiUri}/articulos/productos/list`, parameters)
       .subscribe( rpta => {
-        this.checkParent(rpta)
-        observer.next(rpta)
+        this.checkParent(rpta);
+        observer.next(rpta);
         // observable execution
-        observer.complete()
+        observer.complete();
       });
     });
     return obs;
@@ -47,7 +49,7 @@ export class ArticulosService {
   get(id: number){
     return this.http.get(`${this.ApiUri}/articulo/${id}`);
   }
-  getProductos( id: string ){
+  leerArticuloProductos( id: string ){
     return this.http.get(`${this.ApiUri}/articulo/productos/${id}`);
   }
   delete(id: string){
@@ -62,7 +64,7 @@ export class ArticulosService {
   }
   search(search: string): Observable<any>{
     const obs = new Observable((observer) => {
-      this.http.get(`${this.ApiUri}/articulos/productos/search/${search}`)
+      this.http.get(`${this.ApiUri}/articulos/productos/:search/${search}`)
       .subscribe( rpta => {
         this.checkParent(rpta);
         observer.next(rpta);
@@ -74,7 +76,7 @@ export class ArticulosService {
   }
   searchProductos(search: string): Observable<any>{
     const obs = new Observable((observer) => {
-      this.http.get(`${this.ApiUri}/articulos/productos/search/${search}`).subscribe( rpta => {
+      this.http.get(`${this.ApiUri}/articulos/productos/list/${search}`).subscribe( rpta => {
         this.checkParent(rpta);
         observer.next(rpta);
         // observable execution
@@ -87,39 +89,44 @@ export class ArticulosService {
     return this.http.get(`${this.ApiUri}/Oid`);
   }
   checkParent(regs){
+    // tslint:disable-next-line:prefer-for-of
     for (let inx = 0; inx < regs.length; inx++) {
       const e = regs[inx];
+      // tslint:disable-next-line:prefer-for-of
       for (let index = 0; index < e.productos.length; index++) {
         const p = e.productos[index];
-        if (p.parent == p._id)
-          console.log(e)
-        if (p.parent && p.parent!= p._id && p.pesable == false){
-          console.log("ENTRO", e, p)
-          p.parentname = this.readParent(e.productos, p._id)
+        if (p.parent === p._id) {
+          console.log(e);
+        }
+        if (p.parent && p.parent !== p._id && p.pesable === false){
+          console.log('ENTRO', e, p);
+          p.parentname = this.readParent(e.productos, p._id);
         } else {
           p.parentname = `${p.name} ${p.contiene} ${p.unidad}`;
         }
       }
-    };
+    }
   }
-  readParent(prodList, id: Object, descr?: string) {
-    if (descr == undefined) descr = '';
+  readParent(prodList, id: any, descr?: string) {
+    if (descr === undefined) { descr = ''; }
     const item = this.findProduct(prodList, id);
     if (item._id) {
-      if (item.contiene && item.contiene > 1)
-       descr += (item.unidad ? ` ${item.name} ${item.contiene} ${item.unidad}` : ` ${item.name} ${item.contiene}`)
-      else if (item.unidad) descr += ` ${item.name} ${item.unidad}`
-      else descr += ` ${item.name}`
-      if (item.parent != null && item.parent != item._id && item.pesable == false) {
+      if (item.contiene && item.contiene > 1) {
+       descr += (item.unidad ? ` ${item.name} ${item.contiene} ${item.unidad}` : ` ${item.name} ${item.contiene}`);
+      }
+      else if (item.unidad) { descr += ` ${item.name} ${item.unidad}`; }
+      else { descr += ` ${item.name}`; }
+      if (item.parent != null && item.parent !== item._id && item.pesable === false) {
         descr = this.readParent(prodList, item.parent, descr);
       }
     }
     return descr.trim();
   }
-  findProduct(prodList,id: Object) {
+  findProduct(prodList, id: any ) {
+    // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < prodList.length; index++) {
       const element = prodList[index];
-      if (element._id == id) return element;
+      if (element._id === id) { return element; }
     }
     return {};
   }

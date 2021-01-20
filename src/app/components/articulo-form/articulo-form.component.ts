@@ -20,8 +20,9 @@ export class ArticuloFormComponent implements OnInit {
   articulo: iArticulo;
   producto: iProducto;
   prodList: iProducto[];
+  // tslint:disable-next-line:variable-name
   del_List: iProducto[];
-  unidades: [{ id: any, name: string }]
+  unidades: [{ id: any, name: string }];
 
   /*
   uVtatmp: {
@@ -82,26 +83,28 @@ export class ArticuloFormComponent implements OnInit {
   }
 
   find(id) {
-    this.articulosService.getProductos(id).subscribe(
+    this.articulosService.leerArticuloProductos(id).subscribe(
       res => {
         this.done = true;
 //        this.inputData = res;
         const algo: any = res;
         this.articulo = algo;
-/*
+
         this.prodList = this.articulo.productos;
+
 //        delete this.articulo.productos;
+        // tslint:disable-next-line:prefer-for-of
         for (let index = 0; index < this.prodList.length; index++) {
           const e = this.prodList[index];
           this.prodList[index].parentname = this.readParent(e.parent);
           const unid = { id: e._id, name: this.readParent(e._id) };
           this.prodList[index].infile = true;
           this.prodList[index].changed = false;
-          if (!this.unidades) this.unidades = [unid];
-          else this.unidades.push(unid);
+          if (!this.unidades) { this.unidades = [unid]; }
+          else { this.unidades.push(unid); }
         }
         this.productoReset();
-*/
+
       },
       err => {
         this.done = true;
@@ -157,19 +160,20 @@ export class ArticuloFormComponent implements OnInit {
             this.done = true;
             this.router.navigate(['/articulos']);
           }
-        )
+        );
       }
     );
   }
 
   addProducto() {
+    // tslint:disable-next-line:prefer-for-of
     for (let n = 0; n < this.prodList.length; n++) {
       const e = this.prodList[n];
-      if(e.name == this.producto.name
-        && e.unidad == this.producto.unidad
-        && e.contiene == this.producto.contiene) {
-          console.log( "producto ya existe", e )
-          return
+      if (e.name === this.producto.name
+        && e.unidad === this.producto.unidad
+        && e.contiene === this.producto.contiene) {
+          console.log( 'producto ya existe', e );
+          return;
       }
 
     }
@@ -177,38 +181,43 @@ export class ArticuloFormComponent implements OnInit {
       this.producto.articulo = this.articulo._id;
       this.producto._id = ret;
       this.producto.changed = true;
-      if (this.producto.parent != "")
-        this.producto.parentname = this.readParent(this.producto.parent)
-      if (!this.prodList)
+      if (this.producto.parent !== '') {
+        this.producto.parentname = this.readParent(this.producto.parent);
+      }
+      if (!this.prodList) {
         this.prodList = [this.producto];
-      else
+      }
+      else {
         this.prodList.push(this.producto);
+      }
       const unid = { id: this.producto._id, name: this.readParent(this.producto._id) };
-      if (!this.unidades)
-        this.unidades = [unid]
-      else
+      if (!this.unidades) {
+        this.unidades = [unid];
+      }
+      else {
         this.unidades.push(unid);
+      }
       this.productoReset();
     }, err => {
       console.log(err);
-    })
+    });
   }
-  updateProducto(idx,producto){
+  updateProducto(idx, producto){
     this.productosService.put(producto).subscribe( ret => {
       this.prodList[idx].changed = false;
     }, error => {
       console.log(error);
-    })
+    });
   }
 
-  readParent(id: Object, descr?: string) {
-    if (descr == undefined) descr = '';
+  readParent(id: any, descr?: string) {
+    if ( descr === undefined ) { descr = ''; }
     const item = this.findProduct(id);
     if (item._id) {
-      if (`${item._id}` == `${item.parent}` || item.parent == undefined) item.parent = null
-      if (item.contiene && item.contiene > 1) descr += `${item.name} ${item.contiene} ${item.unidad}`
-      else if (item.unidad) descr += `${item.name} ${item.unidad}`
-      else descr += `${item.name}`
+      if (`${item._id}` === `${item.parent}` || item.parent === undefined) { item.parent = null; }
+      if (item.contiene && item.contiene > 1) { descr += `${item.name} ${item.contiene} ${item.unidad}`; }
+      else if (item.unidad) { descr += `${item.name} ${item.unidad}`; }
+      else { descr += `${item.name}`; }
       if (item.parent != null) {
         descr = this.readParent(item.parent, descr);
       }
@@ -216,16 +225,17 @@ export class ArticuloFormComponent implements OnInit {
     return descr.trim();
   }
 
-  findProduct(id: Object): iProducto {
+  findProduct(id: any): iProducto {
+    // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < this.prodList.length; index++) {
       const element: iProducto = this.prodList[index];
-      if (element._id == id) return element;
+      if (element._id === id) { return element; }
     }
     return {};
   }
 
   eventos(ev) {
-    console.log("Select_ev", ev, this.readParent(this.producto.parent));
+    console.log('Select_ev', ev, this.readParent(this.producto.parent));
   }
 
   save() {
@@ -244,9 +254,9 @@ export class ArticuloFormComponent implements OnInit {
   }
 
   delProducto(id) {
-    if(this.prodList[id].infile == true){
-      if (this.del_List.length == 0) this.del_List[0] = this.prodList[id]
-      else this.del_List.push(this.prodList[id])
+    if (this.prodList[id].infile === true){
+      if (this.del_List.length === 0) { this.del_List[0] = this.prodList[id]; }
+      else { this.del_List.push(this.prodList[id]); }
     }
     console.log(this.del_List);
     this.prodList.splice(id, 1);
