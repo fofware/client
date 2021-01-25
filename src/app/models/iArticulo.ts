@@ -1,15 +1,15 @@
 // tslint:disable-next-line:class-name
 export interface iArticulo {
   _id?: any;
-  fabricante: string;
-  marca: string;
-  rubro: string;
-  linea: string;
-  d_fabricante: boolean;
-  d_marca: boolean;
-  d_rubro: boolean;
-  d_linea: boolean;
-  private_web: boolean;
+  fabricante?: string;
+  marca?: string;
+  rubro?: string;
+  linea?: string;
+  d_fabricante?: boolean;
+  d_marca?: boolean;
+  d_rubro?: boolean;
+  d_linea?: boolean;
+  private_web?: boolean;
   name?: string;
   image?: string;
   url?: string;

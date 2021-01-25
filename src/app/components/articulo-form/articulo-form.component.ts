@@ -53,7 +53,7 @@ export class ArticuloFormComponent implements OnInit {
         };
     */
 //    this.inputData = {};
-//    this.articulo = {};
+    this.articulo = {};
     this.producto = {};
     this.prodList = [];
     this.del_List = [];
@@ -89,10 +89,9 @@ export class ArticuloFormComponent implements OnInit {
 //        this.inputData = res;
         const algo: any = res;
         this.articulo = algo;
-
         this.prodList = this.articulo.productos;
 
-//        delete this.articulo.productos;
+        delete this.articulo.productos;
         // tslint:disable-next-line:prefer-for-of
         for (let index = 0; index < this.prodList.length; index++) {
           const e = this.prodList[index];
@@ -113,14 +112,22 @@ export class ArticuloFormComponent implements OnInit {
     );
   }
 
-  update() {
+  async update() {
     //    if(this.del_List.length > 0)
     //      this.productosService.deleteMany(this.del_List)
     this.articulosService
     .update(this.articulo._id, this.articulo)
     .subscribe(
       res => {
-        console.log(res);
+        this.productosService
+        .update(this.prodList)
+        .subscribe(rpta => {
+          console.log(rpta);
+        },
+          err => {
+            console.log(err);
+        });
+
         this.done = true;
         this.router.navigate(['/articulos']);
       }
@@ -128,28 +135,7 @@ export class ArticuloFormComponent implements OnInit {
         console.log(err);
       }
     );
-/*
 
-
-    this.productosService
-    .update(this.prodList)
-    .subscribe(rpta => {
-      this.articulosService
-      .update(this.articulo._id, this.articulo)
-      .subscribe(
-        res => {
-          this.done = true;
-          this.router.navigate(['/articulos']);
-        }
-        , err => {
-          console.log(err);
-        }
-      );
-    },
-      err => {
-        console.log(err);
-    });
-  */
   }
 
   add() {
@@ -175,7 +161,6 @@ export class ArticuloFormComponent implements OnInit {
           console.log( 'producto ya existe', e );
           return;
       }
-
     }
     this.articulosService.newId().subscribe(ret => {
       this.producto.articulo = this.articulo._id;
@@ -197,6 +182,9 @@ export class ArticuloFormComponent implements OnInit {
       else {
         this.unidades.push(unid);
       }
+      this.productosService.add( this.producto ).subscribe( rpta => {
+        console.log(rpta);
+      });
       this.productoReset();
     }, err => {
       console.log(err);

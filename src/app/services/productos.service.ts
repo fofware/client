@@ -12,7 +12,7 @@ export class ProductosService {
 
 //  ApiUri = 'http://192.168.0.2:3000/api'
   ApiUri = API_URI;
-  
+
   constructor(private http: HttpClient) { }
 
   list() {
@@ -48,16 +48,16 @@ export class ProductosService {
     return this.http.delete(`${this.ApiUri}/producto/${articulo}/productos`);
   }
 */
-  add(registros: iProducto[] ){
-    return this.http.post(`${this.ApiUri}/productos`, registros);
+  add(registro: iProducto ){
+    return this.http.post(`${this.ApiUri}/producto`, registro);
   }
 
   insertMany(productos: iProducto[]){
     return this.http.post(`${this.ApiUri}/productos/imany`, productos);
   }
-  
+
   update(productos: iProducto[]){
-    return this.http.post(`${this.ApiUri}/productos`, productos);
+    return this.http.put(`${this.ApiUri}/productos`, productos);
   }
 
 /*
@@ -125,7 +125,7 @@ export class ProductosService {
         p.name = p.name.replace(/  /g, " ");
 //            if ( p.pesable && p.stock ==)
         //if (!rpta || rpta.length == 0) rpta[0] = p;
-        //else 
+        //else
         if ( p.pesable ){
           if (p.stock == undefined || p.stock == 0) p.stock = sumStock;
           if( sumStock > 0 || e.productos.length > 1) rpta.push(p)

@@ -80,7 +80,7 @@ export class ArticuloCardSelectComponent implements OnInit, OnChanges{
 */
     if (this.setting.pesable.value) { Extra.pesable = this.setting.pesable.qry; }
 //    if (this.setting.precio.value) { Producto.precio = this.setting.precio.qry; }
-    if (this.setting.stock.value) { Extra.$or = this.setting.stock.qry; }
+    if (this.setting.stock.value) { Extra.stock = this.setting.stock.qry; }
     if (this.setting.servicio.value) { Producto.servicio = this.setting.servicio.qry; }
     if (this.setting.pCompra.value) { Producto.pCompra = this.setting.pCompra.qry; }
     if (this.setting.pVenta.value) { Producto.pVenta = this.setting.pVenta.qry; }
@@ -91,7 +91,7 @@ export class ArticuloCardSelectComponent implements OnInit, OnChanges{
         console.log(res);
         const data = res as any;
         // tslint:disable-next-line:no-string-literal
-        if ( data.length === 1 && Articulo['$and'].length === 1
+        if ( data.length === 1 && Articulo['$and'] && Articulo['$and'].length === 1
         && ( this.searchItem === data[0].codigo || this.searchItem === data[0].plu ))
         {
           this.onArticuloSelect.emit(data[0]);
