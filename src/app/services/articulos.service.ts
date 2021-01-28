@@ -19,6 +19,7 @@ export class ArticulosService {
     return this.http.get(`${this.ApiUri}/articulos/list`);
   }
   listProductos() {
+    // tslint:disable-next-line:object-literal-key-quotes
     const parameters = {Articulo: {}, Producto: {}, Sort: { 'fabricante': 1, 'marca': 1, 'rubro': 1, 'linea': 1, 'name': 1 } };
 
 //    const parameters = {};

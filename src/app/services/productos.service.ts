@@ -18,16 +18,16 @@ export class ProductosService {
   list() {
     return this.http.get(`${this.ApiUri}/productos/list`);
   }
-  list_post(params:any): Observable<iProducto>{
+  list_post(params: any): Observable<iProducto>{
     const obs = new Observable((observer) => {
       this.http.post(`${this.ApiUri}/productos/list`, params ).subscribe(res => {
-        const data:any = res;
+        const data: any = res;
 //        const rpta = this.coockProdList(res);
-        observer.next(res)
+        observer.next(res);
         // observable execution
-        observer.complete()
-      })
-    })
+        observer.complete();
+      });
+    });
     return obs;
   }
 
@@ -36,8 +36,8 @@ export class ProductosService {
   }
 
   put(producto){
-    console.log(producto)
-    return this.http.put(`${this.ApiUri}/producto/${producto._id}`,producto);
+    console.log(producto);
+    return this.http.put(`${this.ApiUri}/producto/${producto._id}`, producto);
   }
 
   delete(id: number){
@@ -69,24 +69,25 @@ export class ProductosService {
     return this.http.get(`${this.ApiUri}/articulos/search/${search}`);
   }
 
-  buscar(params:any): Observable<iProducto>{
+  buscar(params: any): Observable<iProducto>{
     const obs = new Observable((observer) => {
       this.http.post(`${this.ApiUri}/productos/buscar`, params ).subscribe(res => {
-        const data:any = res;
+        const data: any = res;
 //        const rpta = this.coockProdList(res);
-        observer.next(res)
+        observer.next(res);
         // observable execution
-        observer.complete()
-      })
-    })
+        observer.complete();
+      });
+    });
     return obs;
   }
   coockProdList(data){
-    let rpta = [];
-    for(let i = 0; i < data.length; i++) {
+    const rpta = [];
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < data.length; i++) {
       const e = data[i];
-      let parentname = `${e.name} ${e.contiene} ${e.unidad}`
-      let sumStock = e.stock*e.contiene;
+      let parentname = `${e.name} ${e.contiene} ${e.unidad}`;
+      let sumStock = e.stock * e.contiene;
       const p = {
         _id: e._id
         , articulo: e.art_id
@@ -97,20 +98,23 @@ export class ProductosService {
         , stock: e.stock
         , barcode: e.barcode
         , codigo: e.codigo
-      }
-      rpta.push(p)
+      };
+      rpta.push(p);
 
+      // tslint:disable-next-line:prefer-for-of
       for (let n = 0; n < e.productos.length; n++) {
-        if(!e.productos[n].contiene) e.productos[n].contiene = 1
-        if(!e.productos[n].stock) e.productos[n].stock = 0
-        sumStock += e.productos[n].stock*e.productos[n].contiene
+        if (!e.productos[n].contiene) { e.productos[n].contiene = 1; }
+        if (!e.productos[n].stock) { e.productos[n].stock = 0; }
+        sumStock += e.productos[n].stock * e.productos[n].contiene;
       }
+      // tslint:disable-next-line:prefer-for-of
       for (let n = 0; n < e.productos.length; n++) {
         if (e.productos[n]) {
-          parentname = this.readParent(e.productos, e.productos[n]._id)
+          parentname = this.readParent(e.productos, e.productos[n]._id);
         } else {
           parentname = `${e.productos[n].name} ${e.productos[n].contiene} ${e.productos[n].unidad}`;
         }
+        // tslint:disable-next-line:no-shadowed-variable
         const p = {
           _id: e.productos[n]._id
           , articulo: e.productos[n].articulo
@@ -121,46 +125,48 @@ export class ProductosService {
           , stock: e.productos[n].stock
           , barcode: e.productos[n].barcode
           , codigo: e.productos[n].codigo
-        }
-        p.name = p.name.replace(/  /g, " ");
+        };
+        p.name = p.name.replace(/  /g, ' ');
 //            if ( p.pesable && p.stock ==)
-        //if (!rpta || rpta.length == 0) rpta[0] = p;
-        //else
+        // if (!rpta || rpta.length == 0) rpta[0] = p;
+        // else
         if ( p.pesable ){
-          if (p.stock == undefined || p.stock == 0) p.stock = sumStock;
-          if( sumStock > 0 || e.productos.length > 1) rpta.push(p)
+          if (p.stock === undefined || p.stock === 0) { p.stock = sumStock; }
+          if ( sumStock > 0 || e.productos.length > 1) { rpta.push(p); }
         } else {
-          rpta.push(p)
+          rpta.push(p);
         }
       }
-      rpta.sort(function(a, b){
-        var x = a.name.toLowerCase();
-        var y = b.name.toLowerCase();
-        if (x < y) {return -1;}
-        if (x > y) {return 1;}
+      rpta.sort( (a, b) => {
+        const x = a.name.toLowerCase();
+        const y = b.name.toLowerCase();
+        if (x < y) {return -1; }
+        if (x > y) {return 1; }
         return 0;
       });
     }
     return rpta;
   }
-  readParent(prodList, id: Object, descr?: string): string {
-    if (descr == undefined) descr = '';
+  readParent(prodList, id: any, descr?: string): string {
+    if (descr === undefined) { descr = ''; }
     const item = this.findProduct(prodList, id);
     if (item._id) {
-      if (item.contiene)
-       descr += (item.unidad ? ` ${item.name} ${item.contiene} ${item.unidad}` : ` ${item.name} ${item.contiene}`)
-      else if (item.unidad) descr += ` ${item.name} ${item.unidad}`
-      else descr += ` ${item.name}`
+      if (item.contiene) {
+       descr += (item.unidad ? ` ${item.name} ${item.contiene} ${item.unidad}` : ` ${item.name} ${item.contiene}`);
+      }
+      else if (item.unidad) { descr += ` ${item.name} ${item.unidad}`; }
+      else { descr += ` ${item.name}`; }
       if (item.parent != null) {
         descr = this.readParent(prodList, item.parent, descr);
       }
     }
     return descr.trim();
   }
-  findProduct(prodList,id: Object) {
+  findProduct(prodList, id: any ) {
+    // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < prodList.length; index++) {
       const element = prodList[index];
-      if (element._id == id) return element;
+      if (element._id === id) { return element; }
     }
     return {};
   }
